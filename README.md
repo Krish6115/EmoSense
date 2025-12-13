@@ -56,9 +56,9 @@ Ambiguous:RemorseCuriosity, Confusion
 
 Neural🛠️ Tech StackFrontend: Streamlit, Plotly Express, PandasBackend API: FastAPI, Uvicorn, Python 3.9Machine Learning: PyTorch, Hugging Face TransformersModel: RoBERTa (Robustly Optimized BERT Pretraining Approach)Data Source: Tweepy (X/Twitter API v2)Deployment: Docker (HF Spaces) & Streamlit Community Cloud
 
-*📂 Project StructurePlaintextEmoSense-Project/
-*├── app.py                  # 🖥️ Main Streamlit Application (Frontend)
-*├── requirements.txt        # 📦 Python dependencies for the UI
+📂 Project StructurePlaintextEmoSense-Project/
+*├── app.py                  # 🖥️ Main Streamlit Application (Frontend).
+*├── requirements.txt        # 📦 Python dependencies for the UI.
 ├── README.md               # 📄 Project Documentation
 ├── assets/                 # 📸 Images and screenshots
 │   └── ui_screenshot.png
