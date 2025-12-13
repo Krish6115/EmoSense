@@ -8,11 +8,11 @@ import plotly.express as px
 # 🔑 PART 1: SECRETS AND CONFIGURATION
 # ==============================================================================
 
-# EmoSense API URL ---
+# --- Your EmoSense API URL ---
 EMOSENSE_API_URL = "https://srkr6115-emosense.hf.space/analyze"
 
 # --- Your X API Bearer Token ---
-X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAIKN4wEAAAAAXSd0%2BXKyz5bnUew8nSQQghtrFCQ%3DOwZq6pp2N5f3QnUSiWj6fgGw8zde3iXOWjKBgNxbXqY3uPZl3k"
+X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAEWN4wEAAAAAAO1IZ3nE3S1RwFqlPtmf4Krd%2F0o%3D6TSvCGYcScPjdCFD8rpvY82jRHIP7InD6S1tdzC6VHtYq6YbPq"
 
 # --- Emoji dictionary for your emotions ---
 EMOJI_MAP = {
@@ -36,12 +36,14 @@ EMOJI_MAP = {
 # ==============================================================================
 
 @st.cache_data(ttl=900)  # Caches data for 15 minutes
-def get_recent_tweets(query, bearer_token, tweet_count=100):
+def get_recent_tweets(query, bearer_token, tweet_count=10):
     """
-    Fetches 100 recent tweets for a given query using the X v2 API.
+    Fetches recent tweets for a given query using the X v2 API.
+    Default set to 10 to save API quota.
     """
     try:
         client = tweepy.Client(bearer_token)
+        # X API minimum max_results is 10
         response = client.search_recent_tweets(
             query=f"{query} -is:retweet lang:en",
             max_results=tweet_count
@@ -64,7 +66,7 @@ def analyze_emotion(text):
             error_detail = response.text
             return {"error": f"API returned status {response.status_code}: {error_detail}"}
     except requests.exceptions.RequestException:
-        return {"error": f"Could not connect to EmoSense API at {EMOSENSE_API_URL}. Is your Kaggle notebook running?"}
+        return {"error": f"Could not connect to EmoSense API at {EMOSENSE_API_URL}. Is your backend running?"}
 
 # ==============================================================================
 # 🖥 PART 3: THE FINAL, UPGRADED STREAMLIT UI
@@ -81,7 +83,7 @@ st.set_page_config(
 st.title("🧠 EmoSense: The Unified Emotion Monitor")
 st.markdown("Analyzing real-time X data for Emotion, Intensity, *and* Sarcasm.")
 
-# --- ❗️ FIXED: "Test a Single Tweet" section now has all 3 metrics ---
+# --- Test a Single Tweet Section ---
 with st.expander("🔬 Test a Single Tweet", expanded=True): 
     single_tweet_text = st.text_input("Enter your own tweet to analyze (e.g., 'Oh great, another meeting')")
     
@@ -93,8 +95,6 @@ with st.expander("🔬 Test a Single Tweet", expanded=True):
                 if "error" in result:
                     st.error(result["error"])
                 else:
-                    # --- This is the new UI you wanted ---
-                    
                     # 1. Extract all data
                     emotions = result['emotions_confidence']
                     intensities = result['predicted_intensity']
@@ -111,7 +111,6 @@ with st.expander("🔬 Test a Single Tweet", expanded=True):
                     col1, col2, col3 = st.columns(3)
                     col1.metric("Top Emotion", f"{emoji} {top_emotion.capitalize()}", f"{confidence:.1%}")
                     col2.metric(f"{top_emotion.capitalize()} Intensity", f"{intensity:.2f} / 1.0")
-                    # --- ❗️ SARCASM SCORE IS NOW HERE ---
                     col3.metric("Sarcasm Score", f"{sarcasm:.1%}")
 
                     # 4. Create the full emotion confidence chart
@@ -144,10 +143,11 @@ if st.button("Analyze Topic ✨"):
     if not query:
         st.warning("Please enter a topic to analyze.")
     else:
-        with st.spinner(f"Fetching up to 100 live tweets for '{query}' and analyzing all 3 tasks..."):
+        # UPDATED: Spinner text now says "10 live tweets"
+        with st.spinner(f"Fetching up to 10 live tweets for '{query}' and analyzing all 3 tasks..."):
             
-            # 1. Fetch tweets
-            tweets = get_recent_tweets(query, X_BEARER_TOKEN) 
+            # 1. Fetch tweets (Defaults to 10 now)
+            tweets = get_recent_tweets(query, X_BEARER_TOKEN, tweet_count=10) 
 
             if not tweets:
                 st.error(f"No recent tweets found for '{query}'. Please try another topic or wait for your API quota to reset.")
@@ -207,7 +207,7 @@ if st.button("Analyze Topic ✨"):
                     st.subheader("Analysis of Individual Tweets")
                     st.markdown("This shows the full power of the unified model on each tweet.")
                     
-                    for res in valid_results[:10]: # Show first 10
+                    for res in valid_results: # Show all 10 results since list is small
                         with st.container(border=True):
                             st.write(f"*Tweet:* {res['text']}")
                             
