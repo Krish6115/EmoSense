@@ -37,8 +37,6 @@ experience the power of the Unified Emotion Monitor live on Streamlit Cloud:
 ## 🏗️ Architecture
 
 The project follows a decoupled Microservices architecture to ensure scalability and ease of deployment.
-
-```mermaid
 graph LR
     A[User / Streamlit UI] -- "1. Input Text / Topic" --> B[Hugging Face API (FastAPI)]
     B -- "2. Tokenization" --> C[RoBERTa Tokenizer]
@@ -59,4 +57,15 @@ Supported EmotionsPositiveNegativeAmbiguousJoy, Love, Gratitude, Approval, Carin
 cd EmoSense-UI
 2. Install DependenciesIt is recommended to create a virtual environment first.Bashpip install -r requirements.txt
 3. Configure API TokensTo use the Live Topic Analysis feature, you need an X (Twitter) Bearer Token.Open app.py.Find the variable X_BEARER_TOKEN.Replace the placeholder with your own Bearer Token from the X Developer Portal.4. Run the ApplicationBashstreamlit run app.py
-The app will open automatically in your browser at http://localhost:8501.🧠 Model Training DetailsThe core of EmoSense is a Multi-Head RoBERTa model.Dataset: Trained on a curated dataset of over 50,000 labeled tweets.Training Infrastructure: Trained on NVIDIA T4 GPUs via Kaggle Kernels.Performance: Achieved significantly higher accuracy than standard BERT-base models on sarcasm detection due to RoBERTa's dynamic masking capabilities.🔮 Future Roadmap[ ] Multilingual Support: Extending the tokenizer to support Hindi and Spanish.[ ] Historical Analysis: Tracking emotion trends on a topic over 24 hours.[ ] LLM Integration: Using Llama-2 to generate textual summaries of the emotional analysis.✍️ Author: SRKREDDY GitHub:Krish6115 LinkedIn: https://www.linkedin.com/in/siva-rama-krishna-reddy-padala/ Built with ❤️ for the love of AI.
+The app will open automatically in your browser at http://localhost:8501.
+🧠 Model Training DetailsThe core of EmoSense is a Multi-Head RoBERTa model.
+Dataset: Trained on a curated dataset of over 50,000 labeled tweets.
+Training Infrastructure: Trained on NVIDIA T4 GPUs via Kaggle Kernels.
+Performance: Achieved significantly higher accuracy than standard BERT-base models on sarcasm detection due to RoBERTa's dynamic masking capabilities.
+🔮 Future Roadmap[ ] Multilingual Support: Extending the tokenizer to support Hindi and Spanish.[ ] 
+Historical Analysis: Tracking emotion trends on a topic over 24 hours.
+[ ] LLM Integration: Using Llama-2 to generate textual summaries of the emotional analysis.
+✍️ Author: SRKREDDY
+GitHub:Krish6115
+[LinkedIn](https://www.linkedin.com/in/siva-rama-krishna-reddy-padala/) 
+Built with ❤️ By Krish :) .
