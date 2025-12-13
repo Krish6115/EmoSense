@@ -40,10 +40,10 @@ The project follows a decoupled Microservices architecture to ensure scalability
 
 ```mermaid
 graph LR
-    A[User / Streamlit UI] -- "1. Input Text / Topic" --> B[Hugging Face API (FastAPI)]
-    B -- "2. Tokenization" --> C[RoBERTa Tokenizer]
-    C -- "3. Input IDs" --> D[EmoRoBERTa Model]
+    A["User / Streamlit UI"] -- "1. Input Text / Topic" --> B["Hugging Face API (FastAPI)"]
+    B -- "2. Tokenization" --> C["RoBERTa Tokenizer"]
+    C -- "3. Input IDs" --> D["EmoRoBERTa Model"]
     D -- "4. Raw Logits" --> B
-    B -- "5. JSON Response\n(Emotion, Intensity, Sarcasm)" --> A
-    A -- "6. Visualization" --> E[Plotly Charts]
+    B -- "5. JSON Response" --> A
+    A -- "6. Visualization" --> E["Plotly Charts"]
 
