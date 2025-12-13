@@ -47,3 +47,43 @@ graph LR
     B -- "5. JSON Response" --> A
     A -- "6. Visualization" --> E["Plotly Charts"]
 
+```
+---
+Supported Emotions: 
+Positive:Joy, Love, Gratitude, Approval, CaringAnger
+Negative:Sadness, Fear, Disgust
+Ambiguous:RemorseCuriosity, Confusion
+---
+Neural🛠️ Tech StackFrontend: Streamlit, Plotly Express, PandasBackend API: FastAPI, Uvicorn, Python 3.9Machine Learning: PyTorch, Hugging Face TransformersModel: RoBERTa (Robustly Optimized BERT Pretraining Approach)Data Source: Tweepy (X/Twitter API v2)Deployment: Docker (HF Spaces) & Streamlit Community Cloud
+---
+📂 Project StructurePlaintextEmoSense-Project/
+├── app.py                  # 🖥️ Main Streamlit Application (Frontend)
+├── requirements.txt        # 📦 Python dependencies for the UI
+├── README.md               # 📄 Project Documentation
+├── assets/                 # 📸 Images and screenshots
+│   └── ui_screenshot.png
+└── notebooks/              # 📓 Research & Training work
+    ├── ML_Hackathon.ipynb  # Model training pipeline (PyTorch)
+    └── Api_gen.ipynb       # API development notebook
+(Note: The Backend API code is deployed separately to Hugging Face Spaces via Docker.)
+---
+💻 How to Run LocallyFollow these steps to set up the project on your local machine.
+1. Clone the RepositoryBashgit clone [https://github.com/SRKR6115/EmoSense.git](https://github.com/SRKR6115/EmoSense.git)
+cd EmoSense-UI
+2. Install DependenciesIt is recommended to create a virtual environment first.Bashpip install -r requirements.txt
+3. Configure API TokensTo use the Live Topic Analysis feature, you need an X (Twitter) Bearer Token.Open app.py.Find the variable X_BEARER_TOKEN.Replace the placeholder with your own Bearer Token from the X Developer Portal.
+4. Run the ApplicationBashstreamlit run app.py
+The app will open automatically in your browser at http://localhost:8501.
+🧠 Model Training DetailsThe core of EmoSense is a Multi-Head RoBERTa model.
+Dataset: Trained on a curated dataset of over 50,000 labeled tweets.
+Training Infrastructure: Trained on NVIDIA T4 GPUs via Kaggle Kernels.
+Performance: Achieved significantly higher accuracy than standard BERT-base models on sarcasm detection due to RoBERTa's dynamic masking capabilities.
+🔮 Future Roadmap[ ] Multilingual Support: Extending the tokenizer to support Hindi and Spanish.[ ]
+Historical Analysis: Tracking emotion trends on a topic over 24 hours.[ ]
+LLM Integration: Using Llama-2 to generate textual summaries of the emotional analysis.
+✍️ Author
+SRKREDDY
+GitHub: Krish6115
+LinkedIn: Siva Rama Krishna Reddy Padala
+Built with ❤️ By Krish :)
+---
