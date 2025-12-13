@@ -48,13 +48,14 @@ graph LR
     A -- "6. Visualization" --> E["Plotly Charts"]
 
 ```
+```mermaid
 Supported Emotions: 
 Positive:Joy, Love, Gratitude, Approval, CaringAnger
 Negative:Sadness, Fear, Disgust
 Ambiguous:RemorseCuriosity, Confusion
 
 Neural🛠️ Tech StackFrontend: Streamlit, Plotly Express, PandasBackend API: FastAPI, Uvicorn, Python 3.9Machine Learning: PyTorch, Hugging Face TransformersModel: RoBERTa (Robustly Optimized BERT Pretraining Approach)Data Source: Tweepy (X/Twitter API v2)Deployment: Docker (HF Spaces) & Streamlit Community Cloud
----
+
 📂 Project StructurePlaintextEmoSense-Project/
 ├── app.py                  # 🖥️ Main Streamlit Application (Frontend)
 ├── requirements.txt        # 📦 Python dependencies for the UI
@@ -85,4 +86,4 @@ SRKREDDY
 GitHub: Krish6115
 LinkedIn: Siva Rama Krishna Reddy Padala
 Built with ❤️ By Krish :)
-
+```
