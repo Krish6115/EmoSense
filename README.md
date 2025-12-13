@@ -48,12 +48,11 @@ graph LR
     A -- "6. Visualization" --> E["Plotly Charts"]
 
 ```
----
 Supported Emotions: 
 Positive:Joy, Love, Gratitude, Approval, CaringAnger
 Negative:Sadness, Fear, Disgust
 Ambiguous:RemorseCuriosity, Confusion
----
+
 Neural🛠️ Tech StackFrontend: Streamlit, Plotly Express, PandasBackend API: FastAPI, Uvicorn, Python 3.9Machine Learning: PyTorch, Hugging Face TransformersModel: RoBERTa (Robustly Optimized BERT Pretraining Approach)Data Source: Tweepy (X/Twitter API v2)Deployment: Docker (HF Spaces) & Streamlit Community Cloud
 ---
 📂 Project StructurePlaintextEmoSense-Project/
@@ -66,7 +65,7 @@ Neural🛠️ Tech StackFrontend: Streamlit, Plotly Express, PandasBackend API: 
     ├── ML_Hackathon.ipynb  # Model training pipeline (PyTorch)
     └── Api_gen.ipynb       # API development notebook
 (Note: The Backend API code is deployed separately to Hugging Face Spaces via Docker.)
----
+
 💻 How to Run LocallyFollow these steps to set up the project on your local machine.
 1. Clone the RepositoryBashgit clone [https://github.com/SRKR6115/EmoSense.git](https://github.com/SRKR6115/EmoSense.git)
 cd EmoSense-UI
@@ -86,4 +85,4 @@ SRKREDDY
 GitHub: Krish6115
 LinkedIn: Siva Rama Krishna Reddy Padala
 Built with ❤️ By Krish :)
----
+
