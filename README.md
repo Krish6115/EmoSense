@@ -1,4 +1,4 @@
-# 🧠 EmoSense: The Unified Emotion Monitor
+## 🧠 EmoSense: The Unified Emotion Monitor
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://srkreddy-emosense.streamlit.app/)
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/SRKR6115/EmoSense)
@@ -49,7 +49,7 @@ graph LR
 
 ```
 
-## Supported Emotions: 
+# Supported Emotions: 
 Positive:Joy, Love, Gratitude, Approval, CaringAnger
 
 Negative:Sadness, Fear, Disgust
@@ -66,7 +66,7 @@ Data Source: Tweepy (X/Twitter API v2)
 
 Deployment: Docker (HF Spaces) & Streamlit Community Cloud
 
-📂 Project StructurePlaintextEmoSense-Project/
+#📂 Project StructurePlaintextEmoSense-Project/
 
 ├── app.py                  # 🖥️ Main Streamlit Application (Frontend)
 
@@ -80,13 +80,13 @@ Deployment: Docker (HF Spaces) & Streamlit Community Cloud
 
 └── notebooks/              # 📓 Research & Training work
 
-    ├── ML_Hackathon.ipynb  # Model training pipeline (PyTorch)
-    
-    └── Api_gen.ipynb       # API development notebook
+   ├── ML_Hackathon.ipynb  # Model training pipeline (PyTorch)
+
+   └── Api_gen.ipynb       # API development notebook
     
 (Note: The Backend API code is deployed separately to Hugging Face Spaces via Docker.)
 
-💻 How to Run LocallyFollow these steps to set up the project on your local machine.
+#💻 How to Run LocallyFollow these steps to set up the project on your local machine.
 
 1. Clone the RepositoryBashgit clone [https://github.com/SRKR6115/EmoSense.git](https://github.com/SRKR6115/EmoSense.git)
 cd EmoSense-UI
@@ -96,7 +96,7 @@ cd EmoSense-UI
  
 The app will open automatically in your browser at http://localhost:8501.
 
-🧠 Model Training DetailsThe core of EmoSense is a Multi-Head RoBERTa model.
+#🧠 Model Training Details: The core of EmoSense is a Multi-Head RoBERTa model.
 
 Dataset: Trained on a curated dataset of over 50,000 labeled tweets.
 
@@ -104,17 +104,18 @@ Training Infrastructure: Trained on NVIDIA T4 GPUs via Kaggle Kernels.
 
 Performance: Achieved significantly higher accuracy than standard BERT-base models on sarcasm detection due to RoBERTa's dynamic masking capabilities.
 
-🔮 Future Roadmap[ ] Multilingual Support: Extending the tokenizer to support Hindi and Spanish.[ ]
+#🔮 Future Roadmap :
+Multilingual Support: Extending the tokenizer to support Hindi and Spanish.[ ]
 Historical Analysis: Tracking emotion trends on a topic over 24 hours.[ ]
 LLM Integration: Using Llama-2 to generate textual summaries of the emotional analysis.
 
-✍️ Author
+#✍️ Author
 
-SRKREDDY
+**SRKREDDY**
 
 GitHub: Krish6115
 
-LinkedIn: Siva Rama Krishna Reddy Padala
+[LinkedIn](https://www.linkedin.com/in/siva-rama-krishna-reddy-padala/)
 
 Built with ❤️ By Krish :)
 
