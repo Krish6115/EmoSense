@@ -111,7 +111,7 @@ LLM Integration: Using Llama-2 to generate textual summaries of the emotional an
 
 #✍️ Author
 
-**SRKREDDY** **RAM JAYADEEP** **HIMASAGAR**
+**SRKREDDY** | **RAM JAYADEEP** | **HIMASAGAR**
 
 GitHub: Krish6115 | RamJayadeepB | HimaSagarB
 
