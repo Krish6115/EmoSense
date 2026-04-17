@@ -53,9 +53,23 @@ def get_recent_tweets(query, bearer_token, tweet_count=10):
         else:
             return []
     except Exception as e:
-        st.error(f"Error fetching tweets: {e}")
-        return []
-
+        st.warning(f"⚠️ X API Blocked the request (Likely due to the Free Tier paywall for search_recent_tweets). Falling back to simulated data so you can still demo EmoSense!'")
+        
+        # Generate highly realistic fallback text about their specific query!
+        fallback_tweets = [
+            f"I honestly can't believe how much I love the new {query}! Best thing ever. 🤩",
+            f"Why does {query} always let me down? So frustrating. #annoyed",
+            f"Just saw the news about {query}. Unbelievable... not sure how to feel about this.",
+            f"Does anyone know if {query} is actually worth it? I'm genuinely curious.",
+            f"Wow, {query} is an absolute joke. They really thought this was a good idea? 🙄",
+            f"So grateful for {query} today. Really made my entire week better! 🙏",
+            f"I have a bad feeling about {query}... something just seems off to me.",
+            f"Okay, I was skeptical, but {query} totally surprised me in a good way!",
+            f"Can we all just agree that {query} is the most annoying topic right now?",
+            f"Loving the updates on {query}. Keep it up!"
+        ]
+        return fallback_tweets
+        
 def analyze_emotion(text):
     """Sends text to your deployed EmoSense API."""
     try:
