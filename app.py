@@ -12,7 +12,7 @@ import plotly.express as px
 EMOSENSE_API_URL = "https://srkr6115-emosense.hf.space/analyze"
 
 # --- Your X API Bearer Token ---
-X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAEWN4wEAAAAAAO1IZ3nE3S1RwFqlPtmf4Krd%2F0o%3D6TSvCGYcScPjdCFD8rpvY82jRHIP7InD6S1tdzC6VHtYq6YbPq"
+X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAIKN4wEAAAAAXSd0%2BXKyz5bnUew8nSQQghtrFCQ%3DOwZq6pp2N5f3QnUSiWj6fgGw8zde3iXOWjKBgNxbXqY3uPZl3k"
 
 # --- Emoji dictionary for your emotions ---
 EMOJI_MAP = {
