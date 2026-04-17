@@ -1,3 +1,14 @@
+---
+title: EmoSense
+emoji: 🧠
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: "1.32.0"
+python_version: "3.9"
+app_file: app.py
+pinned: false
+---
 ## 🧠 EmoSense: The Unified Emotion Monitor
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://srkreddy-emosense.streamlit.app/)
