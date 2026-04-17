@@ -3,6 +3,7 @@ import requests
 import tweepy
 import pandas as pd
 import plotly.express as px
+import time
 
 # ==============================================================================
 # 🔑 PART 1: SECRETS AND CONFIGURATION
@@ -10,6 +11,7 @@ import plotly.express as px
 
 # --- Your EmoSense API URL ---
 EMOSENSE_API_URL = "https://srkr6115-emosense.hf.space/analyze"
+EMOSENSE_HEALTH_URL = "https://srkr6115-emosense.hf.space/"
 
 # --- Your X API Bearer Token ---
 X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAABdV9AEAAAAAs3BPI4iN5UJ%2BHqxHB9D4h10kPpk%3DEY4gFujGa6YdhAQzFlgMPPSNwlBxRjXfGURGBf4tqXXzKhYymu"
@@ -53,34 +55,50 @@ def get_recent_tweets(query, bearer_token, tweet_count=10):
         else:
             return []
     except Exception as e:
-        st.warning(f"⚠️ X API Blocked the request (Likely due to the Free Tier paywall for search_recent_tweets). Falling back to simulated data so you can still demo EmoSense!'")
-        
-        # Generate highly realistic fallback text about their specific query!
-        fallback_tweets = [
-            f"I honestly can't believe how much I love the new {query}! Best thing ever. 🤩",
-            f"Why does {query} always let me down? So frustrating. #annoyed",
-            f"Just saw the news about {query}. Unbelievable... not sure how to feel about this.",
-            f"Does anyone know if {query} is actually worth it? I'm genuinely curious.",
-            f"Wow, {query} is an absolute joke. They really thought this was a good idea? 🙄",
-            f"So grateful for {query} today. Really made my entire week better! 🙏",
-            f"I have a bad feeling about {query}... something just seems off to me.",
-            f"Okay, I was skeptical, but {query} totally surprised me in a good way!",
-            f"Can we all just agree that {query} is the most annoying topic right now?",
-            f"Loving the updates on {query}. Keep it up!"
-        ]
-        return fallback_tweets
-        
+        st.error(f"Error fetching tweets: {e}")
+        return []
+
+def wake_up_backend():
+    """Silently pings the HF Space to wake it up. Runs once per session."""
+    if "backend_awake" not in st.session_state:
+        try:
+            r = requests.get(EMOSENSE_HEALTH_URL, timeout=5)
+            if r.status_code == 200 and r.json().get("model_loaded"):
+                st.session_state.backend_awake = True
+                return
+        except Exception:
+            pass
+        # If we get here, the backend is probably sleeping — keep pinging
+        with st.spinner("🔄 Warming up the AI backend... This takes ~30s on first visit."):
+            for _ in range(12):  # Try for up to ~60 seconds
+                time.sleep(5)
+                try:
+                    r = requests.get(EMOSENSE_HEALTH_URL, timeout=5)
+                    if r.status_code == 200 and r.json().get("model_loaded"):
+                        st.session_state.backend_awake = True
+                        return
+                except Exception:
+                    continue
+        st.session_state.backend_awake = False
+
 def analyze_emotion(text):
-    """Sends text to your deployed EmoSense API."""
-    try:
-        response = requests.post(EMOSENSE_API_URL, json={"text": text})
-        if response.status_code == 200:
-            return response.json()
-        else:
-            error_detail = response.text
-            return {"error": f"API returned status {response.status_code}: {error_detail}"}
-    except requests.exceptions.RequestException:
-        return {"error": f"Could not connect to EmoSense API at {EMOSENSE_API_URL}. Is your backend running?"}
+    """Sends text to your deployed EmoSense API with automatic retry."""
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(EMOSENSE_API_URL, json={"text": text}, timeout=30)
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 503 and attempt < max_retries - 1:
+                time.sleep(5)  # Backend still booting, wait and retry
+                continue
+            else:
+                return {"error": f"API returned status {response.status_code}: {response.text}"}
+        except requests.exceptions.RequestException:
+            if attempt < max_retries - 1:
+                time.sleep(5)
+                continue
+            return {"error": f"Could not connect to EmoSense API. The backend may still be starting up — please try again in a moment."}
 
 # ==============================================================================
 # 🖥 PART 3: THE FINAL, UPGRADED STREAMLIT UI
@@ -92,6 +110,9 @@ st.set_page_config(
     page_icon="🧠",
     layout="wide"
 )
+
+# --- Wake up the HF backend on page load ---
+wake_up_backend()
 
 # --- Title and Header ---
 st.title("🧠 EmoSense: The Unified Emotion Monitor")
