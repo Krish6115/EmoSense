@@ -1,5 +1,7 @@
-streamlit
-requests
-tweepy
-pandas
-plotly
+fastapi
+uvicorn[standard]
+torch
+transformers
+emoji
+huggingface_hub
+pydantic
