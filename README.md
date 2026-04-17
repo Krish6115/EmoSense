@@ -1,12 +1,9 @@
 ---
-title: EmoSense
-emoji: 🧠
+title: EmoSense API
+emoji: ⚡
 colorFrom: blue
 colorTo: indigo
-sdk: streamlit
-sdk_version: "1.32.0"
-python_version: "3.9"
-app_file: app.py
+sdk: docker
 pinned: false
 ---
 ## 🧠 EmoSense: The Unified Emotion Monitor
