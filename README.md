@@ -1,11 +1,3 @@
----
-title: EmoSense API
-emoji: ⚡
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-pinned: false
----
 ## 🧠 EmoSense: The Unified Emotion Monitor
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://srkreddy-emosense.streamlit.app/)
