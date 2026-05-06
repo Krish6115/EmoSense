@@ -3,7 +3,7 @@ FROM python:3.9
 WORKDIR /code
 
 # Copy the requirements file from the root
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements-hf.txt /code/requirements.txt
 
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt

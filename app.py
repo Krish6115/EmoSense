@@ -14,8 +14,11 @@ EMOSENSE_API_URL = "https://srkr6115-emosense.hf.space/analyze"
 EMOSENSE_HEALTH_URL = "https://srkr6115-emosense.hf.space/"
 
 # --- Your X API Bearer Token ---
-X_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAABdV9AEAAAAAs3BPI4iN5UJ%2BHqxHB9D4h10kPpk%3DEY4gFujGa6YdhAQzFlgMPPSNwlBxRjXfGURGBf4tqXXzKhYymu"
-
+# Use Streamlit Secrets Manager for deployment. Locally, create a .streamlit/secrets.toml file.
+try:
+    X_BEARER_TOKEN = st.secrets["X_BEARER_TOKEN"]
+except Exception:
+    X_BEARER_TOKEN = None
 # --- Emoji dictionary for your emotions ---
 EMOJI_MAP = {
     "anger": "😠",
@@ -37,14 +40,25 @@ EMOJI_MAP = {
 # ⚙ PART 2: HELPER FUNCTIONS
 # ==============================================================================
 
+@st.cache_resource
+def get_twitter_client(bearer_token):
+    """Initializes and caches the Tweepy client."""
+    if not bearer_token:
+        return None
+    return tweepy.Client(bearer_token)
+
 @st.cache_data(ttl=900)  # Caches data for 15 minutes
 def get_recent_tweets(query, bearer_token, tweet_count=10):
     """
     Fetches recent tweets for a given query using the X v2 API.
     Default set to 10 to save API quota.
     """
+    client = get_twitter_client(bearer_token)
+    if not client:
+        st.error("Twitter API Token is missing. Please configure Streamlit Secrets.")
+        return []
+
     try:
-        client = tweepy.Client(bearer_token)
         # X API minimum max_results is 10
         response = client.search_recent_tweets(
             query=f"{query} -is:retweet lang:en",
@@ -54,6 +68,9 @@ def get_recent_tweets(query, bearer_token, tweet_count=10):
             return [tweet.text for tweet in response.data]
         else:
             return []
+    except tweepy.errors.TooManyRequests:
+        st.error("Twitter API Rate Limit Exceeded. Please try again later.")
+        return []
     except Exception as e:
         st.error(f"Error fetching tweets: {e}")
         return []

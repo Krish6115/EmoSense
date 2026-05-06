@@ -1,7 +1,6 @@
-fastapi
-uvicorn[standard]
-torch
-transformers
-emoji
-huggingface_hub
-pydantic
+# Frontend Dependencies for Streamlit Cloud
+streamlit>=1.31.0
+requests>=2.31.0
+tweepy>=4.14.0
+pandas>=2.1.0
+plotly>=5.18.0
